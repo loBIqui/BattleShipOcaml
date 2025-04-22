@@ -196,10 +196,36 @@ let random_case () =
 (**
 @author Killian LAPLAUD
 *)
-let read_mouse () : int*int = 
-  if button_down() then 
-    mouse_pos()
-else wait_button_down() 
+let read_mouse () : (string * (int * int) option) =
+  let params = init_params () in
+  let grid_size = params.grid_size in
+  let cell_size = params.cell_size in
+  let margin = params.margin in
+  let grid_pixel_size = grid_size * cell_size in
+
+  (* Attendre un clic de souris *)
+  let (x, y) = 
+    if button_down() then 
+      mouse_pos()
+    else (
+      wait_button_down();  (* Attendre un clic *)
+      mouse_pos()          (* Retourner la position après le clic *)
+    )
+  in
+
+  (* Vérifier si le clic est dans la grille de l'ordinateur *)
+  if x >= margin && x < margin + grid_pixel_size &&
+     y >= margin && y < margin + grid_pixel_size then
+    let col = (x - margin) / cell_size in
+    let row = grid_size - 1 - ((y - margin) / cell_size) in
+    ("Ordinateur", Some (row, col))
+
+  (* Vérifier si le clic est dans la grille du joueur *)
+  else if x >= (2 * margin + grid_pixel_size) && x < (2 * margin + 2 * grid_pixel_size) &&
+          y >= margin && y < margin + grid_pixel_size then
+    let col = (x - (2 * margin + grid_pixel_size)) / cell_size in
+    let row = grid_size - 1 - ((y - margin) / cell_size) in
+    ("Joueur", Some (row, col))
 
 ;;
 
