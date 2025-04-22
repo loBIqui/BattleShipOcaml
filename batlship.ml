@@ -196,7 +196,7 @@ let random_case () =
 (**
 @author Killian LAPLAUD
 *)
-let read_mouse () : (string * (int * int) option) =
+let read_mouse () : (string * (int * int)) =
   let params = init_params () in
   let grid_size = params.grid_size in
   let cell_size = params.cell_size in
@@ -218,18 +218,18 @@ let read_mouse () : (string * (int * int) option) =
      y >= margin && y < margin + grid_pixel_size then
     let xx = (x - margin) / cell_size in
     let yy = grid_size - 1 - ((y - margin) / cell_size) in
-    ("Ordinateur", Some (xx, yy))
+    ("Ordinateur", (xx, yy))
 
   (* Vérifier si le clic est dans la grille du joueur *)
   else if x >= (2 * margin + grid_pixel_size) && x < (2 * margin + 2 * grid_pixel_size) &&
           y >= margin && y < margin + grid_pixel_size then
     let xx = (x - (2 * margin + grid_pixel_size)) / cell_size in
     let yy = grid_size - 1 - ((y - margin) / cell_size) in
-    ("Joueur", Some (xx, yy))
+    ("Joueur", (xx, yy))
 
   (* Si le clic est en dehors des grilles *)
   else
-    ("Aucune", None)
+    ("Aucune", ( -1 , -1))
 ;;
 
 
