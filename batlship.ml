@@ -186,7 +186,8 @@ let random_direction () : t_direction =
 
 
 (**
-@author Killian LAPLAUD*)
+@author Killian LAPLAUD
+@author Tibo*)
 let random_case () =
   let params = init_params () in
   (Random.int(params.grid_size) , Random.int(params.grid_size))
