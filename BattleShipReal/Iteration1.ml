@@ -1,5 +1,5 @@
 #use "inter.ml";;
-#use "cpgraphics.ml";;
+#use "CPgraphics.ml";;
 
 (* Initialisation des paramètres du jeu *)
 let grid_size = 10;;
