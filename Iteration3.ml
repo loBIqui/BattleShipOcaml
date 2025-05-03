@@ -136,7 +136,7 @@ let display_grids_with_ships (grid1 : grid) (grid2 : grid) : unit =
 
 
 (**
-@author Killian LAPLAUD
+@author Killian LAPLAUD oker
 *)
 let read_mouse () : (string * (int * int)) =
   let params = init_params () in
